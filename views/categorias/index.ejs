@@ -1,0 +1,31 @@
+<h1>Categorias</h1>
+<a href="/categorias/nova">Nova categoria</a>
+<br><br>
+<table border="1" cellpadding="6" style="border-collapse: collapse">
+  <tr>
+    <th>Nome</th>
+    <th>Produtos</th>
+    <th>Ações</th>
+  </tr>
+  <% if (categorias.length === 0) { %>
+    <tr>
+      <td colspan="3">Nenhuma categoria cadastrada.</td>
+    </tr>
+  <% } %>
+  <% categorias.forEach(c => { %>
+    <tr>
+      <td><a href="/produtos/categoria/<%= c.id %>"><%= c.nome %></a></td>
+      <td><%= c.Produtos ? c.Produtos.length : 0 %></td>
+      <td>
+        <a href="/categorias/<%= c.id %>/editar">Editar</a>
+        <form action="/categorias/<%= c.id %>/deletar" method="POST"
+              style="display:inline">
+          <button type="submit"
+                  onclick="return confirm('Excluir categoria? Os produtos dela ficarão sem categoria.')">
+            Excluir
+          </button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+</table>

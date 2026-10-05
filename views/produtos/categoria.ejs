@@ -1,0 +1,22 @@
+<h1>Categoria: <%= categoria.nome %></h1>
+<a href="/produtos">Voltar para todos os produtos</a>
+<br><br>
+<table border="1" cellpadding="6" style="border-collapse: collapse">
+  <tr>
+    <th>Nome</th>
+    <th>Preço</th>
+    <th>Quantidade</th>
+  </tr>
+  <% if (produtos.length === 0) { %>
+    <tr>
+      <td colspan="3">Nenhum produto nesta categoria.</td>
+    </tr>
+  <% } %>
+  <% produtos.forEach(p => { %>
+    <tr>
+      <td><%= p.nome %></td>
+      <td>R$ <%= Number(p.preco).toFixed(2) %></td>
+      <td><%= p.quantidade %></td>
+    </tr>
+  <% }) %>
+</table>

@@ -1,0 +1,25 @@
+<h1>Editar produto</h1>
+<form action="/produtos/<%= produto.id %>" method="POST">
+  <label>Nome:</label>
+  <input type="text" name="nome" value="<%= produto.nome %>" required>
+  <br>
+  <label>Preço:</label>
+  <input type="number" name="preco" step="0.01" value="<%= produto.preco %>" required>
+  <br>
+  <label>Quantidade:</label>
+  <input type="number" name="quantidade" value="<%= produto.quantidade %>">
+  <br>
+  <label>Categoria:</label>
+  <select name="categoriaId">
+    <option value="">— Selecione —</option>
+    <% categorias.forEach(c => { %>
+      <option value="<%= c.id %>"
+              <%= produto.categoriaId == c.id ? 'selected' : '' %>>
+        <%= c.nome %>
+      </option>
+    <% }) %>
+  </select>
+  <br><br>
+  <button type="submit">Atualizar</button>
+</form>
+<a href="/produtos">Voltar</a>

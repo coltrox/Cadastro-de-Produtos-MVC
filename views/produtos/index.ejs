@@ -1,0 +1,48 @@
+<h1>Produtos</h1>
+<a href="/produtos/novo">Novo produto</a> |
+<a href="/categorias">Categorias</a>
+
+<form action="/produtos" method="GET" style="margin: 10px 0">
+  <input type="text" name="busca" placeholder="Pesquisar por nome..."
+         value="<%= busca ? busca : '' %>">
+  <button type="submit">Pesquisar</button>
+</form>
+
+<table border="1" cellpadding="6" style="border-collapse: collapse">
+  <tr>
+    <th>Nome</th>
+    <th>Preço</th>
+    <th>Quantidade</th>
+    <th>Categoria</th>
+    <th>Ações</th>
+  </tr>
+  <% if (produtos.length === 0) { %>
+    <tr>
+      <td colspan="5">Nenhum produto encontrado.</td>
+    </tr>
+  <% } %>
+  <% produtos.forEach(p => { %>
+    <tr>
+      <td><%= p.nome %></td>
+      <td>R$ <%= Number(p.preco).toFixed(2) %></td>
+      <td><%= p.quantidade %></td>
+      <td>
+        <% if (p.Categoria) { %>
+          <a href="/produtos/categoria/<%= p.Categoria.id %>">
+            <%= p.Categoria.nome %>
+          </a>
+        <% } else { %>
+          —
+        <% } %>
+      </td>
+      <td>
+        <a href="/produtos/<%= p.id %>/editar">Editar</a>
+        <form action="/produtos/<%= p.id %>/deletar" method="POST"
+              style="display:inline">
+          <button type="submit"
+                  onclick="return confirm('Excluir este produto?')">Excluir</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+</table>
