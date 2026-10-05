@@ -12,13 +12,14 @@ router.get('/', async (req, res) => {
     where.nome = { [Op.like]: '%' + busca + '%' };
   }
 
-  const produtos = await Produto.findAll({
-    where,
-    include: Categoria
-  });
+  const produtos = await Produto.findAll({ where });
   const categorias = await Categoria.findAll();
 
-  res.render('produtos/index', { produtos, categorias, busca });
+  // Mapa id -> nome para exibir a categoria na listagem
+  const categoriasMap = {};
+  categorias.forEach(c => { categoriasMap[c.id] = c.nome; });
+
+  res.render('produtos/index', { produtos, categorias, categoriasMap, busca });
 });
 
 // Formulário de novo produto

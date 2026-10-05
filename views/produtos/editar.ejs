@@ -1,3 +1,9 @@
+<nav>
+  <a href="/">Início</a> |
+  <a href="/produtos">Produtos</a> |
+  <a href="/categorias">Categorias</a>
+</nav>
+
 <h1>Editar produto</h1>
 <form action="/produtos/<%= produto.id %>" method="POST">
   <label>Nome:</label>
@@ -21,5 +27,5 @@
   </select>
   <br><br>
   <button type="submit">Atualizar</button>
+  <a href="/produtos">Cancelar</a>
 </form>
-<a href="/produtos">Voltar</a>
